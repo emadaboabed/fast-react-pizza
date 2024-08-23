@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types'; // Import PropTypes
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
 
 function MenuItem({ pizza }) {
-  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  // Removed `id` since it's not used
+  const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   return (
     <li className="flex gap-4 py-2">
@@ -31,5 +33,17 @@ function MenuItem({ pizza }) {
     </li>
   );
 }
+
+// Add PropTypes validation
+MenuItem.propTypes = {
+  pizza: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    unitPrice: PropTypes.number.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+    soldOut: PropTypes.bool.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default MenuItem;
